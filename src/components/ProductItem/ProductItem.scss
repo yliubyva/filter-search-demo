@@ -1,0 +1,29 @@
+@use '../../styles//variables';
+@use '../../styles/mixins';
+
+.product-item {
+  background-color: variables.$color-container-background;
+  padding: 20px;
+  border-radius: 10px;
+  color: variables.$color-secondary;
+
+  &__article {
+    @include mixins.flex(row, wrap, space-between, center);
+    gap: 30px;
+  }
+
+  &__info {
+    @include mixins.flex(column);
+    gap: 5px;
+  }
+
+  &__title,
+  &__price {
+    color: variables.$color-primary;
+  }
+
+  &__price {
+    font-size: 25px;
+    font-weight: 600;
+  }
+}
