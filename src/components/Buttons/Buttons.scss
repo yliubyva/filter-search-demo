@@ -28,15 +28,13 @@
 }
 
 .button {
-  padding: 10px;
+  padding: 5px 10px;
 }
 
 .control-button {
   color: variables.$color-secondary;
   background-color: white;
   border-radius: 20px;
-  border: 2px solid variables.$color-border;
-  transition: all 0.3s ease;
 
   &:active,
   &:hover {
@@ -44,5 +42,22 @@
     background-color: variables.$color-button-filter;
     border-color: variables.$color-button-filter;
   }
+}
+
+.pagination-button {
+  color: variables.$color-primary;
+  border-radius: 7px;
+
+  &:active,
+  &:hover {
+    background-color: variables.$color-container-background;
+    border-color: variables.$color-container-background;
+  }
+}
+
+.control-button,
+.pagination-button {
+  border: 2px solid variables.$color-border;
+  transition: all 0.3s ease;
 }
 
