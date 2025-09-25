@@ -1,0 +1,60 @@
+@use '../../styles/variables';
+@use '../../styles/mixins';
+
+.pagination {
+  width: 100%;
+  padding: 10px 0;
+  @include mixins.flex(row, wrap, space-between, center);
+  gap: 10px;
+
+  &__controls {
+    @include mixins.flex(row, wrap);
+    gap: 5px;
+  }
+}
+
+.results-per-page {
+  color: variables.$color-secondary;
+  @include mixins.flex(row, nowrap, space-between, center);
+
+  &__label {
+    font-weight: 500;
+    margin-right: 10px;
+  }
+
+  &__field {
+    background-color: variables.$color-container-background;
+    border-radius: 5px;
+    width: 40px;
+    padding: 5px;
+
+    @include mixins.flex();
+  }
+
+  &__input {
+    color: inherit;
+    font-weight: inherit;
+    width: 100%;
+    outline: none;
+    border: none;
+    background: none;
+    appearance: none;
+    -moz-appearance: textfield;
+  }
+
+  &__input::-webkit-outer-spin-button,
+  &__input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  &__value-controls {
+    width: fit-content;
+    @include mixins.flex(column, nowrap);
+  }
+
+  &__value-control {
+    font-size: x-small;
+    color: inherit;
+  }
+}
