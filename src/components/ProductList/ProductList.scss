@@ -1,6 +1,27 @@
 @use '../../styles/mixins';
+@use '../../styles/variables';
 
 .product-list {
   @include mixins.flex(column);
   gap: 20px;
+}
+
+.sort-bar {
+  width: 100%;
+  background-color: variables.$color-container-background;
+  @include mixins.flex(row, wrap, space-between, center);
+  gap: 10px;
+  padding: 10px;
+  border-radius: 5px;
+
+  &__label {
+    color: variables.$color-secondary;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__controls {
+    @include mixins.flex(row, wrap);
+    gap: 15px;
+  }
 }
