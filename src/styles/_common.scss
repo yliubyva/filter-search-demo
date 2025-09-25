@@ -1,3 +1,5 @@
+@use './variables';
+
 * {
   padding: 0;
   margin: 0;
@@ -9,6 +11,8 @@
 }
 
 button {
+  background: none;
+  border: none;
   cursor: pointer;
 }
 
@@ -35,4 +39,8 @@ img {
 
 li {
   list-style: none;
+}
+
+body {
+  font-family: variables.$font-primary;
 }
