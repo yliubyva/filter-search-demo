@@ -1,0 +1,6 @@
+@use '../../styles/mixins';
+
+.product-list {
+  @include mixins.flex(column);
+  gap: 20px;
+}
