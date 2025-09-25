@@ -1,0 +1,29 @@
+@use '../../styles//variables';
+
+.close-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  &__line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: variables.$color-secondary;
+    border-radius: 2px;
+    transform-origin: center center;
+    transition: transform 0.3s ease;
+  }
+
+  &__line--one {
+    transform: translateY(-50%) rotate(45deg);
+  }
+
+  &__line--two {
+    transform: translateY(-50%) rotate(-45deg);
+  }
+}
+
