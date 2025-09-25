@@ -27,3 +27,22 @@
   }
 }
 
+.button {
+  padding: 10px;
+}
+
+.control-button {
+  color: variables.$color-secondary;
+  background-color: white;
+  border-radius: 20px;
+  border: 2px solid variables.$color-border;
+  transition: all 0.3s ease;
+
+  &:active,
+  &:hover {
+    color: white;
+    background-color: variables.$color-button-filter;
+    border-color: variables.$color-button-filter;
+  }
+}
+
