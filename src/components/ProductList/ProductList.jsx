@@ -110,7 +110,8 @@ export const ProductList = ({ data }) => {
     });
   };
   return (
-    <>
+    <div className="product-listing">
+      <h2 className="product-listing__title">{totalProducts} bikes found</h2>
       <div className="sort-bar">
         <span className="sort-bar__label">Order by</span>
         <div className="sort-bar__controls">
@@ -168,7 +169,7 @@ export const ProductList = ({ data }) => {
         handleItemsPerPageChange={handleItemsPerPageChange}
         handleStep={handleStep}
       />
-      <ul className="product-list">
+      <ul className="product-listing__list">
         {productsOnPage.map((product) => (
           <ProductItem
             key={product.id}
@@ -179,6 +180,6 @@ export const ProductList = ({ data }) => {
           />
         ))}
       </ul>
-    </>
+    </div>
   );
 };

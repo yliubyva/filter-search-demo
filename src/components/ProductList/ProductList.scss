@@ -1,9 +1,12 @@
 @use '../../styles/mixins';
 @use '../../styles/variables';
 
-.product-list {
-  @include mixins.flex(column);
-  gap: 20px;
+.product-listing {
+  &,
+  &__list {
+    @include mixins.flex(column);
+    gap: 20px;
+  }
 }
 
 .sort-bar {
