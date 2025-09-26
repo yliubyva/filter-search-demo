@@ -44,3 +44,31 @@ li {
 body {
   font-family: variables.$font-primary;
 }
+
+#light {
+  background-color: white;
+}
+
+#dark {
+  background-color: variables.$color-button-filter;
+}
+
+#light,
+#dark {
+  transition: all 0.3s ease;
+}
+
+#dark .pagination__controls > button,
+#dark .dark-mode-toggle__label,
+#dark .results-per-page__label {
+  color: variables.$color-border;
+}
+
+#dark h1,
+#dark h2 {
+  color: white;
+}
+
+#dark .close-icon__line {
+  background-color: variables.$color-border;
+}

@@ -4,7 +4,12 @@
 .dark-mode-toggle {
   width: 100%;
   max-width: 150px;
+  margin-bottom: 20px;
   @include mixins.flex(row, nowrap, space-between, center);
+
+  &__label {
+    font-weight: 500;
+  }
 
   &__switch {
     background-color: variables.$color-container-background;
