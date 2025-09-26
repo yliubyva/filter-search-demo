@@ -2,7 +2,7 @@ import './Buttons.scss';
 
 export const CloseButton = () => {
   return (
-    <button className="close-button">
+    <button className="close-button" aria-label='Close Window'>
       <div className="close-icon">
         <span className="close-icon__line close-icon__line--one"></span>
         <span className="close-icon__line close-icon__line--two"></span>

@@ -11,13 +11,14 @@ export const DarkModeToggle = () => {
       <span className="dark-mode-toggle__label">
         {firstLetterToUpperCase(theme)} Mode
       </span>
-      <label className="dark-mode-toggle__switch">
+      <label htmlFor='modeToggle' className="dark-mode-toggle__switch">
         <input
           className="dark-mode-toggle__checkbox"
           type="checkbox"
           name="darkMode"
-          id="darkModeToggle"
+          id="modeToggle"
           onChange={() => toggleTheme()}
+          aria-label="Switch theme"
         />
         <span className="dark-mode-toggle__slider"></span>
       </label>

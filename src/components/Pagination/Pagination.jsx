@@ -61,7 +61,7 @@ export const Pagination = ({
         />
       </div>
       <div className="results-per-page">
-        <label className="results-per-page__label">Results per page</label>
+        <label htmlFor='numberInput' className="results-per-page__label">Results per page</label>
         <div className="results-per-page__field">
           <input
             className="results-per-page__input"
@@ -72,6 +72,7 @@ export const Pagination = ({
             onChange={handleItemsPerPageChange}
             step={1}
             min={1}
+            aria-label="Increase results"
           />
           <div className="results-per-page__value-controls">
             <button
