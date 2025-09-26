@@ -24,4 +24,8 @@
     @include mixins.flex(row, wrap);
     gap: 15px;
   }
+
+  &__filter {
+    position: relative;
+  }
 }

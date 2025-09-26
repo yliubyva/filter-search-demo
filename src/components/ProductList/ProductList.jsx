@@ -1,20 +1,52 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { ProductItem } from '../ProductItem/ProductItem';
 import { Pagination } from '../Pagination/Pagination';
 import { ControlButton } from '../Buttons/ControlButton';
+import { FilterDropdown } from '../FilterDropdown/FilterDropdown';
 import './ProductList.scss';
 
 export const ProductList = ({ data }) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortKey, setSortKey] = useState('');
+  const [selectedSpecifications, setSelectedSpecifications] = useState([]);
+  const [selectedRetailers, setSelectedRetailers] = useState([]);
+  const [isSpecDropdownOpen, setIsSpecDropdownOpen] = useState(false);
+  const [isRetailerDropdownOpen, setIsRetailerDropdownOpen] = useState(false);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [itemsPerPage, sortKey]);
+  }, [itemsPerPage, sortKey, selectedSpecifications, selectedRetailers]);
+
+  const getUniqueValues = useCallback((products, key) => {
+    return [...new Set(products.map((product) => product[key]))];
+  }, []);
+
+  const uniqueSpecifications = useMemo(
+    () => getUniqueValues(data, 'specification'),
+    [data, getUniqueValues],
+  );
+  const uniqueRetailers = useMemo(
+    () => getUniqueValues(data, 'retailer'),
+    [data, getUniqueValues],
+  );
+
+  const filteredProducts = useMemo(() => {
+    return data.filter((product) => {
+      const matchesSpecification =
+        selectedSpecifications.length === 0 ||
+        selectedSpecifications.includes(product.specification);
+
+      const matchesRetailer =
+        selectedRetailers.length === 0 ||
+        selectedRetailers.includes(product.retailer);
+
+      return matchesSpecification && matchesRetailer;
+    });
+  }, [data, selectedSpecifications, selectedRetailers]);
 
   const sortedProducts = useMemo(() => {
-    const sortedData = [...data];
+    const sortedData = [...filteredProducts];
 
     if (sortKey === 'price' || sortKey === 'distance') {
       sortedData.sort((a, b) => a[sortKey] - b[sortKey]);
@@ -27,7 +59,10 @@ export const ProductList = ({ data }) => {
     }
 
     return sortedData;
-  }, [sortKey, data]);
+  }, [sortKey, filteredProducts]);
+
+  const isSpecFilterActive = selectedSpecifications.length > 0;
+  const isRetailerFilterActive = selectedRetailers.length > 0;
 
   const totalProducts = sortedProducts.length;
   const totalPages = Math.ceil(totalProducts / itemsPerPage);
@@ -57,6 +92,23 @@ export const ProductList = ({ data }) => {
   const handleSortChange = (key) => {
     setSortKey(key);
   };
+
+  const toggleDropdown = (setter) => setter((prev) => !prev);
+
+  const handleFilterChange = (key, value) => {
+    const setter =
+      key === 'specification'
+        ? setSelectedSpecifications
+        : setSelectedRetailers;
+
+    setter((prevSelected) => {
+      if (prevSelected.includes(value)) {
+        return prevSelected.filter((item) => item !== value);
+      } else {
+        return [...prevSelected, value];
+      }
+    });
+  };
   return (
     <>
       <div className="sort-bar">
@@ -77,6 +129,35 @@ export const ProductList = ({ data }) => {
             isActive={sortKey === 'dateListed'}
             onClick={() => handleSortChange('dateListed')}
           />
+          <div className="sort-bar__filter">
+            <ControlButton
+              label="Specification"
+              isActive={isSpecFilterActive}
+              onClick={() => toggleDropdown(setIsSpecDropdownOpen)}
+            />
+            <FilterDropdown
+              isOpen={isSpecDropdownOpen}
+              uniqueValues={uniqueSpecifications}
+              selectedValues={selectedSpecifications}
+              filterKey="specification"
+              handleFilterChange={handleFilterChange}
+            />
+          </div>
+
+          <div className="sort-bar__filter">
+            <ControlButton
+              label="Retailer"
+              isActive={isRetailerFilterActive}
+              onClick={() => toggleDropdown(setIsRetailerDropdownOpen)}
+            />
+            <FilterDropdown
+              isOpen={isRetailerDropdownOpen}
+              uniqueValues={uniqueRetailers}
+              selectedValues={selectedRetailers}
+              filterKey="retailer"
+              handleFilterChange={handleFilterChange}
+            />
+          </div>
         </div>
       </div>
       <Pagination
