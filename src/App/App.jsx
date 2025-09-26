@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react';
 import { CloseButton } from '../components/Buttons/CloseButton';
 import { DarkModeToggle } from '../components/DarkModeToggle/DarkModeToggle';
-import { productData } from '../data/ProductData';
+import { productData } from '../data/productData';
 import { ProductList } from '../components/ProductList/ProductList';
 import './App.scss';
 
