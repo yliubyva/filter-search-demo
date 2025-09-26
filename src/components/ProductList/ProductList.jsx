@@ -114,8 +114,18 @@ export const ProductList = ({ data }) => {
     setSelectedRetailers([]);
     setSelectedSpecifications([]);
   };
+
+  if (productsOnPage.length === 0) {
+    return (
+      <section className="product-listing product-listing--no-results">
+        <h2>No avaliable bikes by chosen filters</h2>
+        <ControlButton label="Reset filters" onClick={() => resetFilters()} />
+      </section>
+    );
+  }
+
   return (
-    <div className="product-listing">
+    <section className="product-listing">
       <h2 className="product-listing__title">{totalProducts} bikes found</h2>
       <div className="sort-bar">
         <span className="sort-bar__label">Order by</span>
@@ -176,6 +186,7 @@ export const ProductList = ({ data }) => {
         handleItemsPerPageChange={handleItemsPerPageChange}
         handleStep={handleStep}
       />
+
       <ul className="product-listing__list">
         {productsOnPage.map((product) => (
           <ProductItem
@@ -187,6 +198,6 @@ export const ProductList = ({ data }) => {
           />
         ))}
       </ul>
-    </div>
+    </section>
   );
 };
