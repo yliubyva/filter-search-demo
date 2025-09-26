@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ProductItem } from '../ProductItem/ProductItem';
 import { Pagination } from '../Pagination/Pagination';
 import { ControlButton } from '../Buttons/ControlButton';
@@ -13,6 +13,33 @@ export const ProductList = ({ data }) => {
   const [selectedRetailers, setSelectedRetailers] = useState([]);
   const [isSpecDropdownOpen, setIsSpecDropdownOpen] = useState(false);
   const [isRetailerDropdownOpen, setIsRetailerDropdownOpen] = useState(false);
+
+  const specRef = useRef(null);
+  const retailRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        isRetailerDropdownOpen &&
+        retailRef.current &&
+        !retailRef.current.contains(e.target)
+      ) {
+        setIsRetailerDropdownOpen(false);
+      }
+
+      if (
+        isSpecDropdownOpen &&
+        specRef.current &&
+        !specRef.current.contains(e.target)
+      ) {
+        setIsSpecDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isRetailerDropdownOpen, isSpecDropdownOpen]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -145,7 +172,7 @@ export const ProductList = ({ data }) => {
             isActive={sortKey === 'dateListed'}
             onClick={() => handleSortChange('dateListed')}
           />
-          <div className="sort-bar__filter">
+          <div className="sort-bar__filter" ref={specRef}>
             <ControlButton
               label="Specification"
               isActive={isSpecFilterActive}
@@ -160,7 +187,7 @@ export const ProductList = ({ data }) => {
             />
           </div>
 
-          <div className="sort-bar__filter">
+          <div className="sort-bar__filter" ref={retailRef}>
             <ControlButton
               label="Retailer"
               isActive={isRetailerFilterActive}
