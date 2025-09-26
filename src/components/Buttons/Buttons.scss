@@ -54,9 +54,14 @@
   color: variables.$color-primary;
   border-radius: 7px;
 
-  &__active,
-  &:hover {
+  &:hover:not(:disabled),
+  &__active {
     background-color: variables.$color-container-background;
     border-color: variables.$color-container-background;
+  }
+
+  &:disabled {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.1);
   }
 }

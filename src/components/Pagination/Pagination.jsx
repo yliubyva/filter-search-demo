@@ -29,8 +29,16 @@ export const Pagination = ({
   return (
     <div className="pagination">
       <div className="pagination__controls">
-        <PaginationButton label="First" onClick={() => onPageChange(1)} />
-        <PaginationButton label="Prev" onClick={handlePrevPage} />
+        <PaginationButton
+          label="First"
+          onClick={() => onPageChange(1)}
+          isDisabled={currentPage === 1}
+        />
+        <PaginationButton
+          label="Prev"
+          onClick={handlePrevPage}
+          isDisabled={currentPage === 1}
+        />
 
         {pageNumbers.map((number) => (
           <PaginationButton
@@ -41,10 +49,15 @@ export const Pagination = ({
           />
         ))}
 
-        <PaginationButton label="Next" onClick={handleNextPage} />
+        <PaginationButton
+          label="Next"
+          onClick={handleNextPage}
+          isDisabled={currentPage === totalPages}
+        />
         <PaginationButton
           label="Last"
           onClick={() => onPageChange(totalPages)}
+          isDisabled={currentPage === totalPages}
         />
       </div>
       <div className="results-per-page">
