@@ -109,6 +109,11 @@ export const ProductList = ({ data }) => {
       }
     });
   };
+
+  const resetFilters = () => {
+    setSelectedRetailers([]);
+    setSelectedSpecifications([]);
+  };
   return (
     <div className="product-listing">
       <h2 className="product-listing__title">{totalProducts} bikes found</h2>
@@ -159,6 +164,8 @@ export const ProductList = ({ data }) => {
               handleFilterChange={handleFilterChange}
             />
           </div>
+
+          <ControlButton label="Reset filters" onClick={() => resetFilters()} />
         </div>
       </div>
       <Pagination
